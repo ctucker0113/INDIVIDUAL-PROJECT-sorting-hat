@@ -26,3 +26,11 @@ body{
 #sortMenuBtn{
     margin-bottom: 30px;
 }
+
+.divider{
+    margin:20px
+}
+.half-box{
+    width: 50%;
+    border: 3px dotted red
+}
