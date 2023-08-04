@@ -1,11 +1,8 @@
 const openSortingBtnElement = document.querySelector('#sortMenuBtn')
 const nameInputElement = document.querySelector('#inputForm')
 let studentAreaElement = document.querySelector('#studentArea')
-let Gryffindors = []
-let Ravenclaws = []
-let Hufflepuffs = []
-let Slytherins = []
 let allStudents = []
+let uniqueStudentID = 0;
 
 
 
@@ -25,19 +22,15 @@ openSortingBtnElement.addEventListener('click', function(e){
     e.preventDefault()
     //Retrieves the name in the userInput box on the screen
     let userNameElement = document.getElementById("userName").value
-    let newStudent = sortStudent(userNameElement)
-    studentAreaElement.innerHTML +=  `    
-    <div class="half-box" id="studentDisplay">
-        <div id="studentContainer">Good Kids</div>
-            <div class="card" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                <h5 class="card-title">${newStudent.name}</h5>
-                <p class="card-text">${newStudent.house}</p>
-                <a href="#" class="btn btn-primary">EXPEL</a>
-            </div>
-        </div>
-        </div>`
+    
+    //Sorts the new user into a house
+    sortStudent(userNameElement)
+
+    //Renders the full list of sorted students
+    renderGoodStudentsList(allStudents)
+
+
+    uniqueStudentID++
     nameInputElement.innerHTML = ""
 })
 })
@@ -52,21 +45,50 @@ function sortStudent(student){
     let studentObj = { name: student }
     if(sortingNumber < 1){
         studentObj.house = "Gryffindor"
+        studentObj.number = uniqueStudentID
         allStudents.push(studentObj)
     }
     else if(sortingNumber < 2){
         studentObj.house = "Ravenclaw"
+        studentObj.number = uniqueStudentID
         allStudents.push(studentObj)
     }
     else if (sortingNumber < 3){
         studentObj.house = "Hufflepuff"
+        studentObj.number = uniqueStudentID
         allStudents.push(studentObj)
     }
     else if (sortingNumber < 4){
         studentObj.house = "Slytherin"
+        studentObj.number = uniqueStudentID
         allStudents.push(studentObj)
     }
+
     console.log(allStudents)
     return (studentObj)
 }
 
+
+
+
+function renderGoodStudentsList(array){
+    box = ""
+    for(const element of array){
+        box +=             
+        `<div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">${element.name}</h5>
+                <p class="card-text">${element.house}</p>
+                <a href="#" class="btn btn-primary" id="expel-button-${element.number}">EXPEL</a>
+            </div>
+        </div>`
+    }
+    studentAreaElement.innerHTML = box
+    for(let i = 0; i < array.length; i++){
+        document.getElementById(`expel-button-${array[i].number}`).addEventListener('click', function(){
+            console.log(`Expel Button Nmber ${array[i].number} Clicked!`)
+        })
+    }
+
+}
