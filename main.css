@@ -34,3 +34,11 @@ body{
     width: 50%;
     border: 3px dotted red
 }
+
+#allWizards{
+    display: flex;
+}
+
+#studentArea, #darkWizards{
+    width: 50%;
+}
