@@ -1,7 +1,9 @@
 const openSortingBtnElement = document.querySelector('#sortMenuBtn')
 const nameInputElement = document.querySelector('#inputForm')
 let studentAreaElement = document.querySelector('#studentArea')
+let deathEaterAreaElement = document.querySelector('#darkWizards')
 let allStudents = []
+let deathEaters = []
 let uniqueStudentID = 0;
 
 
@@ -29,8 +31,9 @@ openSortingBtnElement.addEventListener('click', function(e){
     //Renders the full list of sorted students
     renderGoodStudentsList(allStudents)
 
-
+    // Updates the unique Student ID variable (so the next student will have a different number)
     uniqueStudentID++
+    //Clears the input area
     nameInputElement.innerHTML = ""
 })
 })
@@ -72,6 +75,7 @@ function sortStudent(student){
 
 
 function renderGoodStudentsList(array){
+    //Adds a card for each student in the allStudents array
     box = ""
     for(const element of array){
         box +=             
@@ -85,10 +89,39 @@ function renderGoodStudentsList(array){
         </div>`
     }
     studentAreaElement.innerHTML = box
+    
+    //Adds functionality to each individual expel button on a student's card
     for(let i = 0; i < array.length; i++){
         document.getElementById(`expel-button-${array[i].number}`).addEventListener('click', function(){
-            console.log(`Expel Button Nmber ${array[i].number} Clicked!`)
+            let tempName = array[i].name
+            expelStudent(array[i].number)
+            renderGoodStudentsList(allStudents)
+            deathEaters.push(tempName)
+            console.log(deathEaters)
+            renderDeathEaters()    
         })
     }
 
+}
+
+function expelStudent(studentNumber){
+    const index = allStudents.findIndex(stu => stu.number === studentNumber)
+    if(index != -1){
+        allStudents.splice(index, 1)
+    }
+}
+
+function renderDeathEaters(){
+    box = ""
+    for(const element of deathEaters){
+        box +=             
+        `<div class="card" style="width: 18rem;">
+            <img src="..." class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">${element}</h5>
+                <p class="card-text">DEATH EATER</p>
+            </div>
+        </div>`
+    }
+    deathEaterAreaElement.innerHTML = box 
 }
