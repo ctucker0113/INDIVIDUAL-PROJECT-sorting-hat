@@ -134,7 +134,7 @@ function renderDeathEaters(){
     for(const element of deathEaters){
         box +=             
         `<div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
+            <img src="https://24.media.tumblr.com/294763456509f782b0e7182f5855924e/tumblr_muk2b0nd461s8qi9co1_500.gif" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">${element}</h5>
                 <p class="card-text">DEATH EATER</p>
