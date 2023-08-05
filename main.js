@@ -106,7 +106,34 @@ function renderGoodStudentsList(array){
             </div>
         </div>`
     }
-    studentAreaElement.innerHTML = box
+//Adds filter buttons for each house at the top of the student list
+    studentAreaElement.innerHTML = `
+    <button id = "gryffindorFilter">Gryffindors</button>
+    <button id = "ravenclawFilter">Ravenclaws</button>
+    <button id = "hufflepuffFilter">Hufflepuffs</button>
+    <button id = "slytherinFilter">Slytherins</button>
+    `
+//Adds all student cards to the display on the screen
+    studentAreaElement.innerHTML += box
+
+//Adds functionality to the filter buttons
+    let gryffindorFilterBtnEl = document.querySelector('#gryffindorFilter')
+    let ravenclawFilterBtnEl = document.querySelector('#ravenclawFilter')
+    let hufflepuffFilterBtnEl = document.querySelector('#hufflepuffFilter')
+    let slytherinFilterBtnEl = document.querySelector('#slytherinFilter')
+    gryffindorFilterBtnEl.addEventListener('click', function(){
+        console.log('GRYFFINDOR!')
+    })
+    ravenclawFilterBtnEl.addEventListener('click', function(){
+        console.log('RAVENCLAW!')
+    })
+    hufflepuffFilterBtnEl.addEventListener('click', function(){
+        console.log('HUFFLEPUFF!')
+    })
+    slytherinFilterBtnEl.addEventListener('click', function(){
+        console.log('SLYTHERIN!')
+    })
+
     
     //Adds functionality to each individual expel button on a student's card
     for(let i = 0; i < array.length; i++){
